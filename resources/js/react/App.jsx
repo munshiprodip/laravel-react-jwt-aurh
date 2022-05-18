@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import PrivateOutlet from "./components/PrivateOutlet";
+import useAuth from "./hooks/useAuth";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 function App() {
+    const { refreshJWT } = useAuth();
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            refreshJWT(token);
+        }
+    }, []);
+
     return (
         <div className="container">
             <NavBar />
