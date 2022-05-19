@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import Alert from "./Alert";
 
 function LoginForm() {
     const { login } = useAuth();
-    const [inputData, setInputData] = useState({});
+    const [inputData, setInputData] = useState({
+        email: "",
+        password: "",
+    });
+    const [alert, setAlert] = useState({
+        status: false,
+        type: "",
+        message: "",
+    });
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -21,6 +30,14 @@ function LoginForm() {
             login(data);
         } catch (error) {
             console.log(error.response);
+            const { status, data } = error.response;
+            if (status === 422 || status === 401) {
+                setAlert({
+                    status: true,
+                    type: "danger",
+                    message: data.error,
+                });
+            }
         }
     };
 
@@ -47,6 +64,7 @@ function LoginForm() {
                                     name="email"
                                     onChange={handleInputChange}
                                     placeholder="email@example.com"
+                                    value={inputData.email}
                                 />
                             </div>
                         </div>
@@ -64,6 +82,7 @@ function LoginForm() {
                                     id="inputPassword"
                                     name="password"
                                     onChange={handleInputChange}
+                                    value={inputData.password}
                                 />
                             </div>
                         </div>
@@ -81,6 +100,9 @@ function LoginForm() {
                     </div>
                 </div>
             </form>
+            {alert.status && (
+                <Alert type={alert.type} message={alert.message} />
+            )}
         </div>
     );
 }

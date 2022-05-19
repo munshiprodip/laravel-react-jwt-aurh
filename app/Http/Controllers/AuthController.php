@@ -26,10 +26,10 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
         ]);
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json($validator->errors()->all()[0], 422);
         }
         if (! $token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Invalid cradential'], 401);
         }
         return $this->createNewToken($token);
     }
@@ -45,7 +45,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json($validator->errors()->all()[0], 400);
         }
         $user = User::create(array_merge(
                     $validator->validated(),

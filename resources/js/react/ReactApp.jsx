@@ -2,19 +2,34 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import AuthContext from "./lib/contexts/AuthContext";
+import RootContext from "./lib/contexts/RootContext";
 
 function ReactApp() {
+    const [loading, setLoading] = useState(true);
     const [loggedIn, setLoggedIn] = useState(false);
     const [authUser, setAuthUser] = useState({});
+    const [notification, setNotification] = useState({
+        status: false,
+        type: "",
+        message: "",
+    });
 
     return (
         <BrowserRouter>
-            <AuthContext.Provider
-                value={{ loggedIn, setLoggedIn, authUser, setAuthUser }}
+            <RootContext.Provider
+                value={{
+                    loading,
+                    setLoading,
+                    loggedIn,
+                    setLoggedIn,
+                    authUser,
+                    setAuthUser,
+                    notification,
+                    setNotification,
+                }}
             >
                 <App />
-            </AuthContext.Provider>
+            </RootContext.Provider>
         </BrowserRouter>
     );
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useContext } from "react";
-import AuthContext from "../lib/contexts/AuthContext";
+import RootContext from "../lib/contexts/RootContext";
 export default function useAuth() {
-    const { setLoggedIn, setAuthUser } = useContext(AuthContext);
+    const { setLoggedIn, setAuthUser, setLoading } = useContext(RootContext);
 
     const login = ({ user, access_token }) => {
         setLoggedIn(true);
@@ -29,6 +29,7 @@ export default function useAuth() {
         } else {
             logout();
         }
+        setLoading(false);
     };
 
     return { login, logout, refreshJWT };

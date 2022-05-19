@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import RootContext from "../lib/contexts/RootContext";
 
 function NavBar() {
+    const { loggedIn } = useContext(RootContext);
+    const { logout } = useAuth();
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -43,23 +47,31 @@ function NavBar() {
                                         ? "nav-link active"
                                         : "nav-link"
                                 }
-                                to="/login"
-                            >
-                                Login
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink
-                                className={(navInfo) =>
-                                    navInfo.isActive
-                                        ? "nav-link active"
-                                        : "nav-link"
-                                }
                                 to="dashboard"
                             >
                                 Dashboard
                             </NavLink>
                         </li>
+                        {loggedIn ? (
+                            <li className="nav-item">
+                                <button className="nav-link" onClick={logout}>
+                                    Logout
+                                </button>
+                            </li>
+                        ) : (
+                            <li className="nav-item">
+                                <NavLink
+                                    className={(navInfo) =>
+                                        navInfo.isActive
+                                            ? "nav-link active"
+                                            : "nav-link"
+                                    }
+                                    to="/login"
+                                >
+                                    Login
+                                </NavLink>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>
