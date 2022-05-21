@@ -6583,8 +6583,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var NotFound = function NotFound() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    className: "h-100vh d-flex justify-content-center align-items-center",
-    children: "404! Page not found"
+    className: "vh-100 d-flex justify-content-center align-items-center",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+      children: "404! Page not found"
+    })
   });
 };
 
