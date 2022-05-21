@@ -4,11 +4,11 @@ import useAuth from "../hooks/useAuth";
 import RootContext from "../lib/contexts/RootContext";
 
 function NavBar() {
-    const { loggedIn } = useContext(RootContext);
+    const { loggedIn, authUser } = useContext(RootContext);
     const { logout } = useAuth();
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <div className="container-fluid">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div className="container">
                 <a className="navbar-brand" href="/">
                     React JWT Auth with Laravel
                 </a>
@@ -24,10 +24,10 @@ function NavBar() {
                     <span className="navbar-toggler-icon" />
                 </button>
                 <div
-                    className="collapse navbar-collapse"
+                    className="collapse navbar-collapse  d-flex justify-content-end"
                     id="navbarSupportedContent"
                 >
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
                         <li className="nav-item">
                             <NavLink
                                 className={(navInfo) =>
@@ -52,11 +52,32 @@ function NavBar() {
                                 Dashboard
                             </NavLink>
                         </li>
+
                         {loggedIn ? (
-                            <li className="nav-item">
-                                <button className="nav-link" onClick={logout}>
-                                    Logout
-                                </button>
+                            <li className="nav-item dropdown">
+                                <a
+                                    className="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="navbarDropdownMenuLink"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    {authUser.name}
+                                </a>
+                                <ul
+                                    className="dropdown-menu"
+                                    aria-labelledby="navbarDropdownMenuLink"
+                                >
+                                    <li>
+                                        <button
+                                            className="dropdown-item"
+                                            onClick={logout}
+                                        >
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
                             </li>
                         ) : (
                             <li className="nav-item">

@@ -5849,15 +5849,16 @@ __webpack_require__.r(__webpack_exports__);
 
 function NavBar() {
   var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_lib_contexts_RootContext__WEBPACK_IMPORTED_MODULE_2__["default"]),
-      loggedIn = _useContext.loggedIn;
+      loggedIn = _useContext.loggedIn,
+      authUser = _useContext.authUser;
 
   var _useAuth = (0,_hooks_useAuth__WEBPACK_IMPORTED_MODULE_1__["default"])(),
       logout = _useAuth.logout;
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("nav", {
-    className: "navbar navbar-expand-lg navbar-light bg-light",
+    className: "navbar navbar-expand-lg navbar-dark bg-dark",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      className: "container-fluid",
+      className: "container",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
         className: "navbar-brand",
         href: "/",
@@ -5874,10 +5875,10 @@ function NavBar() {
           className: "navbar-toggler-icon"
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "collapse navbar-collapse",
+        className: "collapse navbar-collapse  d-flex justify-content-end",
         id: "navbarSupportedContent",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("ul", {
-          className: "navbar-nav me-auto mb-2 mb-lg-0",
+          className: "navbar-nav me-auto mb-2 mb-lg-0 ",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
             className: "nav-item",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
@@ -5896,13 +5897,27 @@ function NavBar() {
               to: "dashboard",
               children: "Dashboard"
             })
-          }), loggedIn ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
-            className: "nav-item",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-              className: "nav-link",
-              onClick: logout,
-              children: "Logout"
-            })
+          }), loggedIn ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("li", {
+            className: "nav-item dropdown",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+              className: "nav-link dropdown-toggle",
+              href: "#",
+              id: "navbarDropdownMenuLink",
+              role: "button",
+              "data-bs-toggle": "dropdown",
+              "aria-expanded": "false",
+              children: authUser.name
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+              className: "dropdown-menu",
+              "aria-labelledby": "navbarDropdownMenuLink",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                  className: "dropdown-item",
+                  onClick: logout,
+                  children: "Logout"
+                })
+              })
+            })]
           }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
             className: "nav-item",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
@@ -6228,6 +6243,43 @@ function SignUpForm() {
 
 /***/ }),
 
+/***/ "./resources/js/react/components/dashboard/SideNav.jsx":
+/*!*************************************************************!*\
+  !*** ./resources/js/react/components/dashboard/SideNav.jsx ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var SideNav = function SideNav() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("nav", {
+    className: "nav flex-column",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+      className: "nav-link active",
+      "aria-current": "page",
+      href: "#",
+      children: "Profile"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+      className: "nav-link",
+      href: "#",
+      children: "User list"
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SideNav);
+
+/***/ }),
+
 /***/ "./resources/js/react/hooks/useAuth.js":
 /*!*********************************************!*\
   !*** ./resources/js/react/hooks/useAuth.js ***!
@@ -6367,13 +6419,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_dashboard_SideNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/dashboard/SideNav */ "./resources/js/react/components/dashboard/SideNav.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 function Dashboard() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    children: "Dashboard page"
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "card mt-3",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "card-header",
+      children: "Dashboard"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "card-body",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "col-md-2",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_dashboard_SideNav__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "col-md-10",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            children: "Dashboard"
+          })
+        })]
+      })
+    })]
   });
 }
 
