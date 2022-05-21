@@ -47,11 +47,23 @@ function NavBar() {
                                         ? "nav-link active"
                                         : "nav-link"
                                 }
-                                to="dashboard"
+                                to="/about"
+                            >
+                                About
+                            </NavLink>
+                        </li>
+                        {/* <li className="nav-item">
+                            <NavLink
+                                className={(navInfo) =>
+                                    navInfo.isActive
+                                        ? "nav-link active"
+                                        : "nav-link"
+                                }
+                                to="admin/dashboard"
                             >
                                 Dashboard
                             </NavLink>
-                        </li>
+                        </li> */}
 
                         {loggedIn ? (
                             <li className="nav-item dropdown">
@@ -87,7 +99,7 @@ function NavBar() {
                                             ? "nav-link active"
                                             : "nav-link"
                                     }
-                                    to="/login"
+                                    to="auth/login"
                                 >
                                     Login
                                 </NavLink>

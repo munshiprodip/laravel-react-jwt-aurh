@@ -1,14 +1,19 @@
 import React, { useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import AuthOutlet from "./components/outlets/AuthOutlet";
+import FrontendOutlet from "./components/outlets/FrontendOutlet";
+import PrivateOutlet from "./components/outlets/PrivateOutlet";
 import PreLoader from "./components/PreLoader";
-import PrivateOutlet from "./components/PrivateOutlet";
 import useAuth from "./hooks/useAuth";
 import RootContext from "./lib/contexts/RootContext";
-import Dashboard from "./pages/Dashboard";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Login from "./pages/backend/auth/Login";
+import Signup from "./pages/backend/auth/Signup";
+import Dashboard from "./pages/backend/Dashboard";
+import Settings from "./pages/backend/Settings";
+import UserList from "./pages/backend/UserList";
+import About from "./pages/frontend/About";
+import Home from "./pages/frontend/Home";
+import NotFound from "./pages/NotFound";
 
 function App() {
     const { loading, setLoading } = useContext(RootContext);
@@ -25,17 +30,26 @@ function App() {
     return loading ? (
         <PreLoader />
     ) : (
-        <div className="container">
-            <NavBar />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/*" element={<PrivateOutlet />}>
-                    <Route path="dashboard" element={<Dashboard />} />
-                </Route>
-            </Routes>
-        </div>
+        <Routes>
+            <Route path="/*" element={<FrontendOutlet />}>
+                <Route path="" element={<Home />} />
+                <Route path="about" element={<About />} />
+                <Route path="*" element={<NotFound />} />
+            </Route>
+
+            <Route path="/auth/*" element={<AuthOutlet />}>
+                <Route path="login" element={<Login />} />
+                <Route path="signup" element={<Signup />} />
+                <Route path="*" element={<NotFound />} />
+            </Route>
+
+            <Route path="/admin/*" element={<PrivateOutlet />}>
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="userlist" element={<UserList />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="*" element={<NotFound />} />
+            </Route>
+        </Routes>
     );
 }
 
